@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PokeDiretta – Metodi di pagamento</title>
+  <meta name="description" content="Pagina di pagamento PokeDiretta con metodi PayPal e Revolut." />
+  <style>
+    :root{
+      --bg: #0b1020;
+      --card: #ffffff;
+      --text: #0f172a;
+      --muted:#475569;
+      --ring:#e5e7eb;
+      --accent:#0ea5e9;
+      --hover:#f1f5f9;
+    }
+    @media (prefers-color-scheme: dark){
+      :root{
+        --bg:#0b1020;
+        --card:#0f172a;
+        --text:#e2e8f0;
+        --muted:#94a3b8;
+        --ring:#1f2937;
+        --hover:#111827;
+      }
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      background: radial-gradient(1200px 800px at 10% 10%, rgba(14,165,233,.15), transparent 60%),
+                  radial-gradient(900px 600px at 90% 30%, rgba(34,197,94,.10), transparent 55%),
+                  var(--bg);
+      color:var(--text);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:24px;
+    }
+    .container{
+      width:min(720px, 100%);
+      background:var(--card);
+      border:1px solid var(--ring);
+      border-radius:16px;
+      box-shadow: 0 10px 30px rgba(2,6,23,.25);
+      padding: clamp(18px, 4vw, 32px);
+    }
+    .logo{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      margin-bottom: clamp(12px, 3vw, 20px);
+    }
+    .logo img{
+      width: min(65vw, 320px);
+      height:auto;
+      object-fit: contain;
+      image-rendering: -webkit-optimize-contrast;
+    }
+    .title{
+      text-align:center;
+      margin:0 0 6px 0;
+      font-size: clamp(20px, 2.4vw, 28px);
+      letter-spacing:.02em;
+    }
+    .subtitle{
+      text-align:center;
+      margin:0 0 18px 0;
+      color:var(--muted);
+      font-size: clamp(14px, 1.6vw, 16px);
+    }
+    .accordion{
+      display:grid;
+      gap:12px;
+    }
+    details{
+      border:1px solid var(--ring);
+      border-radius:12px;
+      background: linear-gradient(180deg, rgba(255,255,255,.02), transparent);
+      overflow:hidden;
+    }
+    summary{
+      list-style:none;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      cursor:pointer;
+      padding: 14px 16px;
+      font-weight:600;
+      user-select:none;
+      outline:none;
+    }
+    summary::-webkit-details-marker{display:none}
+    summary .label{
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+    summary .badge{
+      font:inherit;
+      padding:2px 8px;
+      border-radius:999px;
+      border:1px solid var(--ring);
+      color:var(--muted);
+      font-weight:600;
+      letter-spacing:.02em;
+    }
+    summary::after{
+      content:"▾";
+      transform: rotate(0);
+      transition: transform .2s ease;
+      font-size: 18px;
+      line-height:1;
+      color:var(--muted);
+    }
+    details[open] summary::after{ transform: rotate(-180deg); }
+    details:hover{ background: var(--hover); }
+    .content{
+      padding: 0 16px 16px 16px;
+      line-height:1.6;
+    }
+    .payment-line{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      flex-wrap:wrap;
+      font-size: clamp(15px, 1.7vw, 16px);
+    }
+    .code{
+      padding:6px 10px;
+      border:1px dashed var(--ring);
+      border-radius:8px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: .95em;
+      background: rgba(2,6,23,.04);
+    }
+    .copy-btn{
+      padding:6px 10px;
+      border-radius:8px;
+      border:1px solid var(--ring);
+      background:transparent;
+      font:inherit;
+      cursor:pointer;
+      transition: transform .02s ease-in-out, background .15s ease;
+    }
+    .copy-btn:active{ transform: translateY(1px); }
+    .copy-btn:hover{ background: rgba(2,6,23,.05); }
+    .small{
+      color:var(--muted);
+      font-size:.9em;
+    }
+    footer{
+      margin-top:20px;
+      text-align:center;
+      color:var(--muted);
+      font-size:.85em;
+    }
+  </style>
+</head>
+<body>
+  <main class="container" role="main">
+    <!-- Sostituisci "logo.png" con il file del tuo logo. Mettilo nella stessa cartella di questo HTML. -->
+    <div class="logo">
+      <img src="logo.png" alt="Logo PokeDiretta" />
+    </div>
+
+    <h1 class="title">METODI DI PAGAMENTO :</h1>
+    <p class="subtitle">Apri una tendina per visualizzare i dettagli.</p>
+
+    <section class="accordion" aria-label="Metodi di pagamento">
+      <details id="paypal">
+        <summary>
+          <span class="label"><span class="badge">1</span> PAYPAL</span>
+        </summary>
+        <div class="content">
+          <div class="payment-line">
+            <span class="code" id="paypalEmail">PAYPAL : pokediretta@gmail.com</span>
+            <button class="copy-btn" data-copy="#paypalEmail" aria-label="Copia l'indirizzo PayPal">Copia</button>
+          </div>
+          <p class="small">Suggerimento: quando invii un pagamento, seleziona “Amici e familiari” se appropriato.</p>
+        </div>
+      </details>
+
+      <details id="revolut">
+        <summary>
+          <span class="label"><span class="badge">2</span> REVOLUT</span>
+        </summary>
+        <div class="content">
+          <div class="payment-line">
+            <span class="code" id="revolutInfo">REVOLUT : @france5b</span>
+          </div>
+        </div>
+      </details>
+    </section>
+    <footer>© <span id="year"></span> PokeDiretta</footer>
+  </main>
+
+  <script>
+    // Aggiorna l'anno nel footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Copia negli appunti
+    function setupCopyButtons(){
+      const buttons = document.querySelectorAll('.copy-btn');
+      buttons.forEach(btn => {
+        btn.addEventListener('click', async () => {
+          const targetSel = btn.getAttribute('data-copy');
+          const node = document.querySelector(targetSel);
+          if(!node) return;
+          // Estrae solo il testo puro (utile se in futuro si aggiungono link)
+          const text = (node.innerText || node.textContent || '').replace(/^.*?:\s*/, '');
+          try{
+            await navigator.clipboard.writeText(text);
+            const original = btn.textContent;
+            btn.textContent = 'Copiato!';
+            btn.disabled = true;
+            setTimeout(()=>{
+              btn.textContent = original;
+              btn.disabled = false;
+            }, 1500);
+          }catch(e){
+            // Fallback: seleziona il testo
+            const range = document.createRange();
+            range.selectNodeContents(node);
+            const sel = window.getSelection();
+            sel.removeAllRanges();
+            sel.addRange(range);
+            alert('Selezione effettuata: premi Ctrl/Cmd+C per copiare.');
+          }
+        });
+      });
+    }
+    setupCopyButtons();
+  </script>
+</body>
+</html>
